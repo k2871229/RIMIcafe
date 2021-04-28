@@ -18,6 +18,16 @@
 </head>
 <body>
 	<%
+		String mem_id = null;
+		if (session.getAttribute("mem_id") != null) {
+			mem_id = (String)session.getAttribute("mem_id");
+		}
+		if ( mem_id != null) {
+			out.println("<script>");
+			out.println("alert('이미 로그인이 되어있습니다.')");
+			out.println("location.href = 'main.jsp'");
+			out.println("</script>");
+		}
 		if (member.getMem_id() == null || member.getMem_pw() == null || member.getMem_name() == null 
 				|| member.getMem_address() == null || member.getMem_phone() == null) {
 				out.println("<script>");
@@ -35,7 +45,7 @@
 				} else {
 					session.setAttribute("mem_id", member.getMem_id());
 					out.println("<script>");
-					out.println("location.href = 'index.jsp'");
+					out.println("location.href = 'main.jsp'");
 					out.println("</script>");
 				} 
 			}

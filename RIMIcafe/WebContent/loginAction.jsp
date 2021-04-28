@@ -15,9 +15,20 @@
 </head>
 <body>
 	<%
+		String mem_id = null;
+		if (session.getAttribute("mem_id") != null) {
+			mem_id = (String)session.getAttribute("mem_id");
+		}
+		if ( mem_id != null) {
+			out.println("<script>");
+			out.println("alert('이미 로그인이 되어있습니다.')");
+			out.println("location.href = 'main.jsp'");
+			out.println("</script>");
+		}
 		MemberDAO memberDAO = new MemberDAO();
 		int result = memberDAO.login(member.getMem_id(), member.getMem_pw());
 		if (result == 1 ) {
+			session.setAttribute("mem_id", member.getMem_id());
 			out.println("<script>");
 			out.println("location.href = 'main.jsp'");
 			out.println("</script>");
