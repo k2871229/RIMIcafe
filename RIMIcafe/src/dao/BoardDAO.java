@@ -97,7 +97,7 @@ public class BoardDAO {
 		ArrayList<Board> list = new ArrayList<Board>();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
-			pstmt.setInt(1, getNext() - (pageNumber - 1) * 10);
+			pstmt.setInt(1, getNext() - (pageNumber - 1) * 5);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Board brd = new Board();
@@ -117,7 +117,7 @@ public class BoardDAO {
 	
 	// 다음 페이지가 있는지 없는지(페이징처리)
 	public boolean nextPage(int pageNumber) {
-		String SQL = "select * from boardtbl where brd_num < ? and brd_delete = 1 order by brd_num desc limit 5";
+		String SQL = "select * from boardtbl where brd_num < ? and brd_delete = 1";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setInt(1, getNext() - (pageNumber - 1) * 5);
@@ -132,5 +132,59 @@ public class BoardDAO {
 		}
 		return false;	//다음 페이지가 없음
 	}
+	
+	// id로 게시글 불러오기
+		public Board getBoard(int brd_num) {
+			String SQL = "select * from boardtbl where brd_num = ?";
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, brd_num);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					Board brd = new Board();
+					brd.setBrd_num(rs.getInt(1));
+					brd.setBrd_title(rs.getString(2));
+					brd.setMem_id(rs.getString(3));
+					brd.setBrd_content(rs.getString(4));
+					brd.setBrd_date(rs.getString(5));
+					brd.setBrd_delete(rs.getInt(6));
+					return brd;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();	
+			} finally {
+				closeAll();
+			}
+			return null;
+		}
+	
+	//해당 num의 게시글 수정
+	public int update(int brd_num, String brd_title, String brd_content) {
+		String SQL = "update board set brd_title = ? , brd_content =? where brd_num = ?";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, brd_title);
+			pstmt.setString(2, brd_content);
+			pstmt.setInt(3, brd_num);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		return -1; //데이터베이스 오류
+	}
+	
+	// 글 삭제
+		public int delete(int brd_num) {
+			String SQL = "update boardtbl set brd_delete = 0 where brd_num = ?";
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, brd_num);
+				return pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+			return -1; //데이터베이스 오류
+		}
+	
 }
 	

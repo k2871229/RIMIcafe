@@ -1,23 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="dto.Product"%>
+<%@ page import="dao.ProductDAO"%>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <!-- 부트스트랩 -->
   <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- 부트스트랩 커스텀 -->
   <link href="resources/css/modern-business.css" rel="stylesheet">
-  <title>RIMIcafe</title>
+<title>상품 상세 정보</title>
 </head>
 <body>
-<!-- 로그인 정보 담기 -->
+	<!-- 로그인 정보 담기 -->
 <%
 	String mem_id = null;
 	if(session.getAttribute("mem_id") != null) {
@@ -84,57 +77,33 @@
       </div>
     </div>
   </nav>
-  <header>
-	<%@ include file="carousel.jsp" %>
-  </header>
-
-  <!-- Page Content -->
-  <div class="container">
-
-    <h1 class="my-4"></h1>
-
-
-    <!-- 등록된 상품 보기 -->
-    <h2>RIMIcafe의 new LineUP!</h2>
-
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project One</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    <!-- /.row -->
-
-    <hr>
-
-    <!-- Call to Action Section -->
-    <div class="row mb-4">
-      <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-      </div>
-    </div>
-
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <%@ include file="footer.jsp" %>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="resources/vendor/jquery/jquery.min.js"></script>
-  <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">상품 정보</h1>
+		</div>
+	</div>
+	<%
+		// 제품목록 페이지에서 넘어온 아이디의 값을 가져온다.
+		// id="p1234"
+		String id = request.getParameter("id");
+	
+		//상품 리파지토리 객체를 가져온다. (Static객체)
+		ProductDAO dao = ProductDAO.getInstance();
+		// 스테틱 인스턴스 객체를 가져와서 업데이트 된 제품 리스트에서 제품을 찾음
+		Product product = dao.getProductById(id);
+	%>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<h3><%=product.getPrd_name()%></h3>
+				<p><%=product.getPrd_content()%>
+				<p><b>상품 코드 : </b><span class="badge badge-danger"> <%=product.getPrd_code()%></span>
+				<h4><%=product.getPrd_price()%>원</h4>
+				<p><a href="#" class="btn btn-info"> 상품 주문 &raquo;</a> <a	href="./products.jsp" class="btn btn-secondary"> 상품 목록 &raquo;</a>
+			</div>
+		</div>
+		<hr>
+	</div>
+	<jsp:include page="footer.jsp" />
 </body>
-
 </html>

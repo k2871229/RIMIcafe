@@ -1,23 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ page import="dto.Product"%>
+<jsp:useBean id="productDAO" class="dao.ProductDAO" scope="session" />
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
   <!-- 부트스트랩 -->
   <link href="resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- 부트스트랩 커스텀 -->
   <link href="resources/css/modern-business.css" rel="stylesheet">
-  <title>RIMIcafe</title>
+<title>상품 등록 정보</title>
 </head>
 <body>
-<!-- 로그인 정보 담기 -->
+	<!-- 로그인 정보 담기 -->
 <%
 	String mem_id = null;
 	if(session.getAttribute("mem_id") != null) {
@@ -84,57 +77,69 @@
       </div>
     </div>
   </nav>
-  <header>
-	<%@ include file="carousel.jsp" %>
-  </header>
+	<div class="jumbotron">
+		<div class="container">
+			<h1 class="display-3">상품 등록</h1>
+		</div>
+	</div>
+	<div class="container">
+		<form name="newProduct" action="./processAddProduct.jsp" class="form-horizontal" method="post">
+			<div class="form-group row">
+				<label class="col-sm-2">상품 코드</label>
+				<div class="col-sm-3">
+					<input type="text" name="prd_code" class="form-control" >
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">상품명</label>
+				<div class="col-sm-3">
+					<input type="text" name="prd_name" class="form-control" >
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">가격</label>
+				<div class="col-sm-3">
+					<input type="text" name="prd_price" class="form-control" >
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">분류</label>
+				<div class="col-sm-5">
+					<input type="radio" name="prd_category" value="Coffee " > 신규 제품 
+					<input type="radio" name="prd_category" value="Tea" > 중고 제품 
+					<input type="radio" name="prd_category" value="Juice" > 재생 제품
+					<input type="radio" name="prd_category" value="Bean" > 재생 제품
+				</div>
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-sm-2">상세 정보</label>
+				<div class="col-sm-5">
+					<textarea name="prd_content" cols="50" rows="2"
+						class="form-control"></textarea>
+				</div>
+			</div>
 
-  <!-- Page Content -->
-  <div class="container">
+			<div class="form-group row">
+				<label class="col-sm-2">이미지</label>
+				<div class="col-sm-5">
+					<input type="file" name="productImage" class="form-control">
+				</div>
+			</div>
+			
 
-    <h1 class="my-4"></h1>
-
-
-    <!-- 등록된 상품 보기 -->
-    <h2>RIMIcafe의 new LineUP!</h2>
-
-    <div class="row">
-      <div class="col-lg-4 col-sm-6 portfolio-item">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">Project One</a>
-            </h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    <!-- /.row -->
-
-    <hr>
-
-    <!-- Call to Action Section -->
-    <div class="row mb-4">
-      <div class="col-md-8">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
-      </div>
-      <div class="col-md-4">
-        <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
-      </div>
-    </div>
-
-  </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <%@ include file="footer.jsp" %>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="resources/vendor/jquery/jquery.min.js"></script>
-  <script src="resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+			<div class="form-group row">
+				<div class="col-sm-offset-2 col-sm-10 ">
+					<input type="submit" class="btn btn-primary" value="등록" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
 </body>
-
 </html>
+
+
