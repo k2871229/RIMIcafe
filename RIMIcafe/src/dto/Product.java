@@ -11,13 +11,11 @@ public class Product implements Serializable {
 	private Integer prd_price;	//상품가격
 	private String prd_content;	//상품설명
 	private String prd_category; //상품카테고리
-	private String prd_date;	//날짜
-	private String prd_filename;//이미지 파일명
-	private Integer prd_delete;	//삭제여부
+	private String filename;//이미지 파일명
 
 	//기본생성자
 	public Product() {
-
+		super();
 	}
 
 	//아이디, 이름, 가격으로 생성자
@@ -69,28 +67,12 @@ public class Product implements Serializable {
 		this.prd_category = prd_category;
 	}
 
-	public String getPrd_date() {
-		return prd_date;
+	public String getFilename() {
+		return filename;
 	}
 
-	public void setPrd_date(String prd_date) {
-		this.prd_date = prd_date;
-	}
-
-	public String getPrd_filename() {
-		return prd_filename;
-	}
-
-	public void setPrd_filename(String prd_filename) {
-		this.prd_filename = prd_filename;
-	}
-
-	public Integer getPrd_delete() {
-		return prd_delete;
-	}
-
-	public void setPrd_delete(Integer prd_delete) {
-		this.prd_delete = prd_delete;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	
 	
