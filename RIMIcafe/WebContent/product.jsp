@@ -28,7 +28,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="nav.jsp" />
+	<%@ include file ="nav.jsp" %>
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">상품 정보</h1>
@@ -63,6 +63,15 @@
 					<a href="./cart.jsp" class="btn btn-warning"> 장바구니 &raquo;</a>
 					<a href="./productList.jsp" class="btn btn-secondary"> 상품 목록 &raquo;</a>
 				</form>
+				
+		<% if(session.getAttribute("mem_id") != null) { %>
+      	<%
+      		if(mem_id.equals("admin")) {
+     	 %>
+     	 <a href="editProduct.jsp">
+    	  <li class="btn btn-dark ml-1">상품수정</li></a>
+    	  <% } }%>
+				
 			</div>
 		</div>
 		<hr>

@@ -17,7 +17,6 @@
   <title>RIMIcafe</title>
 </head>
 <body>
-<!-- 로그인 정보 담기 -->
 <%
 	int pageNumber = 1; //기본 페이지를 의미.(1 페이지)
 	if (request.getParameter("pageNumber") != null) {

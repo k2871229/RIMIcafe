@@ -15,8 +15,16 @@
 
 	<div class="jumbotron">
 		<div class="container">
-			<h1 class="display-3">상품 목록</h1>
-		</div>
+			<h1 class="display-5">상품 목록</h1>
+		
+		<% if(session.getAttribute("mem_id") != null) { %>
+      	<%
+      		if(mem_id.equals("admin")) {
+     	 %>
+     	 <a href="addProduct.jsp">
+    	  <li class="btn btn-dark btn-sm ml-3">글쓰기</li></a>
+    	  <% } }%>
+      </div>
 	</div>	
 	
 	<div class="container">
