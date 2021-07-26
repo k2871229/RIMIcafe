@@ -22,7 +22,7 @@
       		if(mem_id.equals("admin")) {
      	 %>
      	 <a href="addProduct.jsp">
-    	  <li class="btn btn-dark btn-sm ml-3">글쓰기</li></a>
+    	  <li class="btn btn-dark btn-sm ml-3">상품 추가</li></a>
     	  <% } }%>
       </div>
 	</div>	

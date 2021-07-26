@@ -68,8 +68,8 @@
       	<%
       		if(mem_id.equals("admin")) {
      	 %>
-     	 <a href="editProduct.jsp">
-    	  <li class="btn btn-dark ml-1">상품수정</li></a>
+     	 <a onclick="return confirm('정말 삭제하시겠습니까?')" href="./deleteProduct.jsp?id=<%=rs.getString("prd_code")%>"
+     	 class="btn btn-dark ml-1" role="button">상품삭제</a>
     	  <% } }%>
 				
 			</div>
